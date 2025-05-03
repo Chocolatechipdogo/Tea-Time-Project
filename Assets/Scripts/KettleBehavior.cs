@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class KettleBehavior : MonoBehaviour
 {
     public GameObject TeaKettle;
+    public GameObject tablePlacement;
     private bool holdingKettle;
-    private bool notOG;
-    const float OgX = -5.98f;
-    const float OgY = 2.25f;
-    private Vector2 kettleOGPostion = new Vector2(OgX, OgY);
+    private bool notOG = false;
+    private Vector2 kettleOGPostion;
+     
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,26 +30,30 @@ public class KettleBehavior : MonoBehaviour
 
     public void OnMouseUp()
     {
-        holdingKettle = false; 
+        holdingKettle = false;
+        transform.Translate(kettleOGPostion);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("see OG X: " + OgX);
+        
         if (holdingKettle)
         {
-            Debug.Log("see x position: " + TeaKettle.transform.position.x);
+            
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             transform.Translate(mousePosition);
             
         }
-        else if (notOG) // Currently the object can't be let go without it going wild 
+        else if (!holdingKettle && notOG) // Currently the object only goes back to the start 
         {
             
-            transform.Translate(kettleOGPostion);
+            transform.position = kettleOGPostion;
             notOG = false;
+            
         }
+       
+        
         
 
     }
