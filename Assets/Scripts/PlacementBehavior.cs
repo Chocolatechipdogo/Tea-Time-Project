@@ -8,22 +8,25 @@ public class PlacementBehavior : MonoBehaviour
     public Transform pos;
     private Vector2 posToShare;
     public KettleBehavior TheKettle;
-    private Vector2 ogPos;
+    private Vector2 lastPos;
     // Start is called before the first frame update
     void Start()
     {
         posToShare = new Vector2(pos.transform.position.x, pos.transform.position.y);
-        ogPos = TheKettle.kettleOGPostion;
+        lastPos = TheKettle.currentPos;
         Debug.Log("seeing position stored to be shared: " + posToShare.x + posToShare.y);
     }
 
     public void OnMouseEnter()
     {
-        TheKettle.kettleOGPostion = posToShare;
+        TheKettle.currentPos = posToShare;
     }
-    public void nMouseExit()
+    public void OnMouseExit()
     {
-        TheKettle.kettleOGPostion = ogPos;
+        if (!TheKettle.canBeTrashed())
+        {
+            TheKettle.ResetPos();
+        }
     }
     // Update is called once per frame
     void Update()

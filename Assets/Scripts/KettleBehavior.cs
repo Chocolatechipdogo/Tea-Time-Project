@@ -10,8 +10,9 @@ public class KettleBehavior : MonoBehaviour
     public GameObject tablePlacement;
     private bool holdingKettle;
     private bool notOG = false;
-    public Vector2 kettleOGPostion;
-     
+    private Vector2 kettleOGPostion;
+    public Vector2 currentPos;
+    private bool EnteredPlacement;
 
 
 
@@ -19,6 +20,7 @@ public class KettleBehavior : MonoBehaviour
     void Start()
     {
         kettleOGPostion = new Vector2(TeaKettle.transform.position.x, TeaKettle.transform.position.y);
+        currentPos = kettleOGPostion;
     }
 
 
@@ -31,7 +33,11 @@ public class KettleBehavior : MonoBehaviour
     public void OnMouseUp()
     {
         holdingKettle = false;
-        transform.Translate(kettleOGPostion);
+        transform.Translate(currentPos);
+        if (currentPos != kettleOGPostion)
+        {
+            EnteredPlacement = true;
+        }
     }
 
     // Update is called once per frame
@@ -48,7 +54,7 @@ public class KettleBehavior : MonoBehaviour
         else if (!holdingKettle && notOG) // Currently the object only goes back to the start 
         {
             
-            transform.position = kettleOGPostion;
+            transform.position = currentPos;
             notOG = false;
             
         }
@@ -57,4 +63,22 @@ public class KettleBehavior : MonoBehaviour
         
 
     }
+
+    public void ResetPos()
+    {
+        currentPos = kettleOGPostion;
+    }
+
+    public bool canBeTrashed()
+    {
+        if (EnteredPlacement)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 }
