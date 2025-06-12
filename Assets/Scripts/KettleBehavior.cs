@@ -10,7 +10,7 @@ public class KettleBehavior : MonoBehaviour
     public GameObject tablePlacement;
     private bool holdingKettle;
     private bool notOG = false;
-    private Vector2 kettleOGPostion;
+    public Vector2 kettleOGPostion;
      
 
 
