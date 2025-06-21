@@ -13,7 +13,7 @@ public class KettleBehavior : MonoBehaviour
     private Vector2 kettleOGPostion;
     public Vector2 currentPos;
     private bool EnteredPlacement;
-
+    private int currentOrder = 0;
 
 
     // Start is called before the first frame update
@@ -22,6 +22,17 @@ public class KettleBehavior : MonoBehaviour
         kettleOGPostion = new Vector2(TeaKettle.transform.position.x, TeaKettle.transform.position.y);
         currentPos = kettleOGPostion;
     }
+
+    public int GetCurrentOrder() 
+    {
+        return currentOrder;
+    }
+
+    public void SetCurrentOrder(int newOrder) 
+    {
+        currentOrder = newOrder;
+    }
+
 
 
     public void OnMouseDown()
@@ -67,6 +78,7 @@ public class KettleBehavior : MonoBehaviour
     public void ResetPos()
     {
         currentPos = kettleOGPostion;
+        currentOrder = 0;
     }
 
     public bool canBeTrashed()

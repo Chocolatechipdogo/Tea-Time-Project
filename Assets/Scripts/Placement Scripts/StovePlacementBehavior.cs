@@ -2,25 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlacementBehavior : MonoBehaviour
+public class StovePlacementBehavior : PlacementBehavior
 {
 
-    public Transform pos;
-    private Vector2 posToShare;
-    public KettleBehavior TheKettle;
-    private Vector2 lastPos;
+    private int orderNumber = 2;
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {
         posToShare = new Vector2(pos.transform.position.x, pos.transform.position.y);
-        lastPos = TheKettle.currentPos;
-        Debug.Log("seeing position stored to be shared: " + posToShare.x + posToShare.y);
     }
+
 
     public void OnMouseEnter()
     {
-        TheKettle.currentPos = posToShare;
+        if (TheKettle.GetCurrentOrder() < orderNumber)
+        {
+
+            TheKettle.currentPos = posToShare;
+            TheKettle.SetCurrentOrder(orderNumber);
+            Debug.Log("Entered STOVE area");
+
+        }
     }
+
     public void OnMouseExit()
     {
         if (!TheKettle.canBeTrashed())
@@ -28,6 +36,8 @@ public class PlacementBehavior : MonoBehaviour
             TheKettle.ResetPos();
         }
     }
+
+
     // Update is called once per frame
     void Update()
     {
