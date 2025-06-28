@@ -29,14 +29,16 @@ public class StovePlacementBehavior : PlacementBehavior
         }
     }
 
-    public void OnMouseExit()
+  /*  public void OnMouseExit()
     {
         if (!TheKettle.canBeTrashed())
         {
-            TheKettle.ResetPos();
+            TheKettle.currentPos = TheKettle.prevPos;
+
+            TheKettle.SetCurrentOrder(TheKettle.GetCurrentOrder() - 1);
         }
     }
-
+  */
 
     // Update is called once per frame
     void Update()

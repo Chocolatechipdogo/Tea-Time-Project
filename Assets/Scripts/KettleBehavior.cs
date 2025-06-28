@@ -12,6 +12,7 @@ public class KettleBehavior : MonoBehaviour
     private bool notOG = false;
     private Vector2 kettleOGPostion;
     public Vector2 currentPos;
+    public Vector2 prevPos;
     private bool EnteredPlacement;
     private int currentOrder = 0;
 
@@ -21,6 +22,7 @@ public class KettleBehavior : MonoBehaviour
     {
         kettleOGPostion = new Vector2(TeaKettle.transform.position.x, TeaKettle.transform.position.y);
         currentPos = kettleOGPostion;
+        prevPos = kettleOGPostion;
     }
 
     public int GetCurrentOrder() 
@@ -62,13 +64,15 @@ public class KettleBehavior : MonoBehaviour
             transform.Translate(mousePosition);
             
         }
-        else if (!holdingKettle && notOG) // Currently the object only goes back to the start 
+        else if (!holdingKettle && notOG)
         {
-            
+
+        
             transform.position = currentPos;
             notOG = false;
             
         }
+    
        
         
         
@@ -80,6 +84,8 @@ public class KettleBehavior : MonoBehaviour
         currentPos = kettleOGPostion;
         currentOrder = 0;
     }
+
+    
 
     public bool canBeTrashed()
     {

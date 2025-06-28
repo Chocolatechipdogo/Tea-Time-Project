@@ -21,19 +21,22 @@ public class TablePlacementBehavior : PlacementBehavior
         if(TheKettle.GetCurrentOrder() < orderNumber)
         {
 
-            TheKettle.currentPos = posToShare;
+            //TheKettle.currentPos = posToShare;
+            //TheKettle.prevPos = posToShare;
             TheKettle.SetCurrentOrder(orderNumber);
             Debug.Log("Entered TABLE area!");
+            Debug.Log("The Kettle's order: " + TheKettle.GetCurrentOrder());
         }
     }
 
-    public void OnMouseExit()
+    /*public void OnMouseExit()
     {
         if (!TheKettle.canBeTrashed())
         {
             TheKettle.ResetPos();
         }
     }
+    */
 
 
     // Update is called once per frame
